@@ -30,10 +30,10 @@ header#document-header
     nav
         margin: auto
         .header-button
-            display: flex
+            display: flex !important
             align-items: center
         .logo img
-         max-width: 12rem
+            max-width: 12rem
 
 header#document-header 
     .header-right-block
@@ -53,7 +53,7 @@ header#document-header
                 padding-right: 0.3rem
         button.header-button
             span
-                font-size: var(--body-size)
+                font-size: var(--body-size) !important
             &:hover span
                 color: #8C79E8
 
@@ -66,6 +66,7 @@ header#document-header
         > li.menu-block 
             width: 100%
             border-bottom: none !important
+            align-self: end
             > a
                 padding: 0
                 display: block
@@ -162,6 +163,7 @@ header#document-header .container
         a 
             text-decoration: underline
             text-decoration-thickness: 1px
+            text-transform: uppercase
             &:hover
                 color: #8C79E8 !important
 
@@ -259,6 +261,7 @@ header.hero
         .heading.container
             h2
                 width: 100%
+                max-width: 100%
                 border-top: 0.0625rem solid #BDB7CF
                 border-bottom: 0.0625rem solid #BDB7CF
                 padding-top: 1rem

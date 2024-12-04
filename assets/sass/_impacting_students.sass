@@ -82,27 +82,25 @@
               padding-bottom: 3rem
               padding-top: 3rem
               text-align: center
-              &:first-child
-                border-right: 0.0625rem solid #271A38
-          dl
-            display: flex
-            flex-direction: column-reverse
-            dd 
+              display: flex
+              flex-direction: column-reverse
+              min-width: auto !important
               font-size: var(--body-size)
               font-weight: 400
               line-height: 100%
-              text-align: center
-              margin-bottom: 2rem
-            dt, dt strong
-              color: #8A76E8
-              font-size: 3rem
-              font-weight: 400
-              line-height: 120%
-              text-transform: uppercase
-              min-width: auto !important
-            dt picture img
-              margin-left: auto
-              margin-right: auto
+              &:first-child
+                border-right: 0.0625rem solid #271A38
+              span
+                margin-top: 2rem
+                &, strong
+                  color: #8A76E8
+                  font-size: 3rem
+                  font-weight: 400
+                  line-height: 120%
+                  text-transform: uppercase
+                picture img
+                  margin-left: auto
+                  margin-right: auto
       .block:nth-child(7),
       .block:nth-child(28)
         .block-content
@@ -222,28 +220,25 @@
         display: flex
         ul
           display: block
-          dl
-            display: grid
-            grid-template-columns: calc(128px + 4rem) repeat(2, 1fr)
-            grid-template-rows: repeat(3, 1fr)
-            dt, dt strong
-              color: #8A76E8
-              min-width: auto !important
-              font-size: var(--h2-size)
-              font-weight: 230
-              line-height: 120%
-            picture
-              margin-right: 4rem
-              width: 128px
-              height: 128px
-            dt 
+          li
+            display: block
+            width: 100%
+            text-transform: uppercase
+            span
               display: inline-flex
-              grid-column: 1 / 3
-              grid-row: 1 / 3
-            dd
-              text-transform: uppercase
-              grid-column: 2 / 4
-              grid-row: 2 / 4
+              width: 100%
+              align-items: center
+              justify-content: flex-start
+              &, strong
+                color: #8A76E8
+                min-width: auto !important
+                font-size: var(--h2-size)
+                font-weight: 230
+                line-height: 120%
+              picture
+                margin-right: 4rem
+                width: 128px
+                height: 128px
       .block:nth-child(22)
         font-size: var(--lead-size)
         font-weight: 400
@@ -303,22 +298,23 @@
             text-align: center
             ul.odd-items
               display: block
-              picture
-                height: 147px
-                display: flex
-                margin-bottom: 2rem
-                align-items: flex-end
-                img
-                  margin-left: auto
-                  margin-right: auto
-              dt, dt strong
-                color: #FFF
-                font-size: 3rem
-                font-weight: 400
-                line-height: 120%
-                min-width: auto !important
-              dd
+              li
                 margin-top: 0
+                span 
+                  &, strong
+                    color: #FFF
+                    font-size: 3rem
+                    font-weight: 400
+                    line-height: 120%
+                    min-width: auto !important
+                  picture
+                    height: 147px
+                    display: flex
+                    margin-bottom: 2rem
+                    align-items: flex-end
+                    img
+                      margin-left: auto
+                      margin-right: auto
       .block:nth-child(33)
         margin-left: calc(50% - 1.7rem)
       .block:nth-child(34)
@@ -362,24 +358,29 @@
             li
               padding-top: 2rem
               width: 100%
-              dt, dt strong
-                color: #FFF
+              height: 100%
+              align-content: end
+              text-align: center
+              padding-bottom: 1rem
+              span
                 text-align: center
-                font-size: 3rem
-                font-weight: 400
-                line-height: 120%
-                min-width: auto !important
-              dt strong
-                margin-top: 2rem
-                margin-bottom: 1.7rem
-              picture img
-                margin-left: auto
-                margin-right: auto
-              dd
-                text-align: center
-                border-top: 0.0625rem solid #271A38
                 padding-top: 1rem
                 padding-bottom: 1rem
+                border-bottom: 0.0625rem solid #271A38
+                margin-bottom: 1rem
+                &, strong
+                  color: #FFF
+                  text-align: center
+                  font-size: 3rem
+                  font-weight: 400
+                  line-height: 120%
+                  min-width: auto !important
+                  strong
+                    margin-top: 2rem
+                    margin-bottom: 1.7rem
+                picture img
+                  margin-left: auto
+                  margin-right: auto
               &:not(:last-child)
                 border-right: 0.0625rem solid #271A38
     .block:nth-child(36)
@@ -399,20 +400,24 @@
       border-right: 0.0625rem solid #271A38
       padding: 2rem
       padding-bottom: 8rem
-      figure
-        display: flex
-        flex-direction: column-reverse
-        padding-right: 0px
-        figcaption p
-          color: #FFF
-          .signature
-            font-weight: 600
-        blockquote
-          margin-top: 2rem
-          p
-            font-style: normal
-            line-height: 160%
-            font-size: var(--lead-size)
+      .testimonials
+        width: 100%
+        figure
+          display: flex
+          flex-direction: column-reverse
+          padding-right: 0px
+          padding-left: 0px
+          width: 100%
+          figcaption p
+            color: #FFF
+            .signature
+              font-weight: 600
+          blockquote
+            margin-top: 2rem
+            p
+              font-style: normal
+              line-height: 160%
+              font-size: var(--lead-size)
     .block:nth-child(39)
       border-top: 0.0625rem solid #271A38
       padding-bottom: 10rem
@@ -512,11 +517,14 @@
                 padding-top: 2rem
                 &:first-child
                   border-right: none
+                span
+                  &, strong
+                    font-size: var(--lead-size)
+                  picture
+                    img
+                      max-width: 8rem
               li + li
-                margin-top: 0px
-            dl
-              dt, dt strong
-                font-size: var(--lead-size)
+                margin-top: 0px                
         .block:nth-child(9)
           margin-top: 2rem
         .block:nth-child(10)
@@ -550,14 +558,25 @@
                 font-size: 1.3rem
         .heading.container:nth-child(17)
           margin-top: 3rem
+        .block:nth-child(20)
+          ul 
+            li 
+              span 
+                picture
+                  margin-right: 2rem
+                  img
+                    max-width: 8rem
         .block:nth-child(22)
           margin-bottom: 4rem
         .block:nth-child(32),
         .block:nth-child(33)
-          .block-content
-            ul.odd-items
-              dt, dt strong
-                font-size: var(--lead-size)
+          .container
+            .block-content
+              ul.odd-items
+                li
+                  span
+                    &, strong
+                      font-size: var(--lead-size)
         .block:nth-child(31)
           padding-top: 2rem
           padding-bottom: 2rem
@@ -576,6 +595,10 @@
           margin-right: 0px
           border-top: none
           padding-top: 0px
+          li
+            span
+              &, strong
+                font-size: var(--lead-size)
         .block:nth-child(34)
           padding-top: 2rem
           padding-bottom: 2rem
@@ -596,11 +619,12 @@
               li
                 height: 100%
                 align-content: end
-                dt, dt strong
-                  font-size: var(--lead-size)
-                dt strong
-                  margin-top: 2rem
-                  margin-bottom: 1.7rem
+                span
+                  &, strong
+                    font-size: var(--lead-size)
+                  strong
+                    margin-top: 2rem
+                    margin-bottom: 1.7rem
         .block:nth-child(39)
           width: 80%
           padding: 0 0 4rem 0
