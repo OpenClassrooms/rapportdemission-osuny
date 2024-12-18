@@ -10,3 +10,8 @@ jsconfig.json
 yarn-error.log
 /static/pagefind
 /output
+
+# Added by cargo
+
+/target
+/rust

@@ -1,0 +1,19 @@
+{{ $menu := partial "GetMenu" "social" }}
+
+{{ if $menu }}
+  {{ partial "commons/menu.html"
+    (dict
+      "kind"        "social"
+      "level"       1
+      "class"       "nav-social"
+  )}}
+{{ end }}
+
+{{ with (or site.Params.social site.Data.website.social) }}
+  {{ $site_social_links := . }}
+  {{ if $site_social_links }}
+    <ul class="footer-social site-links">
+      {{ partial "commons/socials" . }}
+    </ul>
+  {{ end }}
+{{ end }}

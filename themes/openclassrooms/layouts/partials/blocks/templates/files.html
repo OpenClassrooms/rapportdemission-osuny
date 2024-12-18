@@ -1,0 +1,34 @@
+{{- $block := .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+
+{{- with .block.data -}}
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+          "description" .description
+        )}}
+        
+        <ul class="files">
+          {{- range .files }}
+            {{ if ne .id "" }}
+              {{ if partial "GetMedia" .id }}
+                <li>
+                  <figure>
+                    {{ partial "commons/download-link" (dict 
+                      "id" .id
+                      "title" .title
+                      "with_caption" true
+                    ) }}
+                  </figure>
+                </li>
+              {{ end -}}
+            {{ end -}}
+          {{ end -}}
+        </ul>
+      </div>
+    </div>
+  </div>
+{{- end -}}

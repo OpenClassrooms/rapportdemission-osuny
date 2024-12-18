@@ -1,0 +1,12 @@
+{{ $direction := "square" }}
+{{ $image := partial "GetMedia" .id }}
+
+{{ if $image }}
+  {{ if gt $image.ratio 1 }}
+    {{ $direction = "landscape" }}
+  {{ else if lt $image.ratio 1 }}
+    {{ $direction = "portrait" }}
+  {{ end }}
+{{ end }}
+
+{{ return $direction }}

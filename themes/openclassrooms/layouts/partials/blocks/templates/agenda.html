@@ -1,0 +1,46 @@
+{{- $block := .block }}
+{{- $block_class := partial "GetBlockClass" .block -}}
+{{- with .block.data -}}
+  {{- $options := .options -}}
+  {{- $layout := .layout | default "list" -}}
+  
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ $events_page := site.GetPage "/events" }}
+        {{ $link := .title_link }}
+
+        {{ if and .category $options.categories }}
+          {{ $term := site.GetPage (printf "/events_categories%s" .category) }}
+          {{ $link = $term.Permalink }}
+        {{ end }}
+        
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+          "description" .description
+          "link" $link
+        )}}
+
+        {{ if .events }}
+          <div class="events events--{{- $layout -}}">
+            {{ range .events }}
+              {{ $event := site.GetPage .file }}
+              {{ with $event }}
+                  {{ partial "events/event" (dict
+                    "event" .
+                    "layout" $layout
+                    "options" $options
+                    "heading" (printf "h%d" $block.ranks.children)
+                  ) }}
+              {{ end }}
+            {{ end }}
+          </div>
+        {{ else if .no_event_message }}
+          <p>{{ partial "PrepareHTML" .no_event_message }}</p>
+        {{ end }}
+
+      </div>
+    </div>
+  </div>
+{{ end -}}

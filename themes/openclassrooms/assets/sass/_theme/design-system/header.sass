@@ -1,0 +1,206 @@
+header#document-header
+    background: $header-background
+    border-bottom: $header-border-bottom-width solid var(--color-border)
+    color: $header-color
+    position: fixed
+    left: 0
+    transition: transform $header-sticky-transition, background $header-sticky-transition
+    top: 0
+    width: 100%
+    z-index: $zindex-header
+    @include media-breakpoint-down(desktop)
+        border-bottom: 0
+        width: 100%
+    .dropdown-menu
+        transition: background $header-sticky-transition
+    &.is-sticky, html.has-menu-opened &
+        background: $header-sticky-background
+        color: $header-sticky-color
+        .menu
+            a,
+            a:hover,
+            a:focus,
+            a:active,
+            span
+                color: inherit
+        @if $header-sticky-invert-logo
+            .logo
+                img, .logo-text
+                    filter: invert(1)
+        @include media-breakpoint-up(desktop)
+            .dropdown-menu
+                background: $header-sticky-dropdown-background
+                color: $header-sticky-dropdown-color
+    &.is-sticky
+        .pagefind-ui__toggle
+            color: $header-sticky-color
+    html.is-scrolling-down:not(.has-menu-opened, .has-modal-opened, .has-search-opened) &
+        @include media-breakpoint-down(desktop)
+            transform: translateY(-100%)
+        @include media-breakpoint-up(desktop)
+            &:not(:hover)
+                transform: translateY(-100%)
+    .logo
+        @extend %logo
+        color: $header-color
+        img
+            height: $header-logo-height
+            @if $header-sticky-invert-logo
+                transition: filter $header-sticky-transition
+            @include media-breakpoint-up(desktop)
+                height: $header-logo-height-desktop
+
+    // Top menu
+    .upper-menu
+        background: $header-upper-menu-background
+        border-bottom: $header-upper-menu-border-bottom-width solid var(--color-border)
+        transition: background $header-sticky-transition
+        z-index: $zindex-header
+        &, a
+            color: $header-upper-menu-color
+        ul
+            @include list-reset
+            @include meta
+            display: flex
+            gap: $spacing-3
+            width: 100%
+            @include media-breakpoint-up(desktop)
+                align-items: baseline
+                justify-content: center
+                gap: $spacing-5
+            // horizontal scroll for mobile
+            @include media-breakpoint-down(desktop)
+                height: $header-upper-menu-mobile-height
+                overflow-x: auto
+                scrollbar-width: none
+                &::-webkit-scrollbar
+                    display: none
+        @include media-breakpoint-down(desktop)
+            background: transparent
+            border-top: $header-upper-menu-border-bottom-width solid var(--color-border)
+            color: $header-upper-menu-sticky-color
+            display: none
+            position: absolute
+            top: var(--header-height)
+            transition-delay: 0.3
+            .container
+                padding-left: 0
+                padding-right: 0
+                ul
+                    padding-left: var(--grid-gutter)
+                    padding-right: var(--grid-gutter)
+            html.has-menu-opened &
+                background: $header-upper-menu-sticky-background
+                display: block
+        .nav-level-1
+            a
+                text-decoration: none
+            > li:not(.nav-search)
+                line-height: 1
+                border: none
+                @include media-breakpoint-down(desktop)
+                    height: 100%
+                a,
+                span,
+                button
+                    display: block
+                    padding: 0
+                    white-space: nowrap
+                    @include media-breakpoint-up(desktop)
+                        padding: $header-upper-menu-padding-y 0
+                    @include media-breakpoint-down(desktop)
+                        line-height: $header-upper-menu-mobile-height
+                    &.active
+                        box-shadow: inset 0 -4px 0 0 var(--color-border)
+    @include media-breakpoint-down(desktop)
+        &.has-upper-menu
+            .menu
+                padding-top: $header-upper-menu-mobile-height
+        html.has-menu-opened &
+            nav
+                padding-bottom: 0
+    &.is-sticky
+        .upper-menu
+            background: $header-upper-menu-sticky-background
+            &, a
+                color: $header-upper-menu-sticky-color
+
+// TODO : Est-ce au bon endroit ?
+body
+    &::after
+        @include inset(0)
+        background-color: $body-overlay-color
+        content: ""
+        pointer-events: none
+        position: fixed
+        opacity: 0
+        transition: opacity $header-transition
+        z-index: $zindex-body-overlay
+
+    html.has-menu-opened &,
+    html.has-modal-opened &,
+    html.has-offcanvas-opened &,
+    html.has-offcanvas-opened &
+        overflow: hidden
+        height: 100%
+        min-height: -webkit-fill-available
+        &::after
+            display: block
+            opacity: 1
+            pointer-events: inherit
+    html.has-offcanvas-opened &
+        &::after
+            background-color: $toc-overlay-color
+            z-index: $zindex-header + 1
+    html.has-modal-opened &
+        &::after
+            z-index: $zindex-modal - 1
+    html.is-animating:not(.has-menu-opened) &
+        &::after
+            display: block
+            opacity: 0
+
+header#document-header
+    nav:not(.upper-menu)
+        padding-bottom: $header-nav-padding-y
+        padding-top: $header-nav-padding-y
+        @include media-breakpoint-up(desktop)
+            padding-bottom: $header-nav-padding-y-desktop
+            padding-top: $header-nav-padding-y-desktop
+        > .container
+            align-items: center
+            display: flex
+            flex-wrap: wrap
+            justify-content: space-between
+        .header-button
+            @include button-reset
+            border: 0
+            color: inherit
+            display: none
+            padding: 0
+            position: relative
+            line-height: 1
+            &:focus
+                box-shadow: none
+            &:focus-visible
+                outline-color: gray
+                outline-offset: 5px
+                outline-style: dashed
+                outline-width: 1px
+            @include media-breakpoint-down(desktop)
+                display: flex
+                align-items: center
+            span:first-of-type
+                @include meta
+                font-size: pxToRem(14)
+                text-transform: uppercase
+            span:last-of-type
+                background: none
+                @include icon-block(menu-line, before)
+                    vertical-align: baseline
+                    margin-right: $icon-burger-margin-right
+            &[aria-expanded="true"]
+                span:last-of-type
+                    &::before
+                        content: map-get($icons, "close-line")
+                        margin-right: $icon-close-margin-right

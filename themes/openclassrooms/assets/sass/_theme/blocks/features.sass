@@ -1,0 +1,56 @@
+.block-features
+    ul
+        @include list-reset
+    li
+        display: flex
+        flex-direction: column
+        + li
+            margin-top: $spacing-5
+        .name
+            margin-bottom: $spacing-2
+        figure
+            order: -1
+            margin-bottom: $spacing-3
+            picture
+                img
+                    margin: auto
+                    display: block
+            picture:not(.is-png, .is-svg)
+                img
+                    object-fit: cover
+                    width: 100%
+                    aspect-ratio: 16/9
+            figcaption
+                @include meta
+                margin-top: $spacing-2
+                text-align: right
+            picture.is-png
+                display: block
+                padding-top: $spacing-3
+                img
+                    margin: initial
+                    max-width: $block-features-icon-max-width
+                @include media-breakpoint-down(desktop)
+                    margin-bottom: $spacing-2
+    @include in-page-with-sidebar
+        li
+            flex-direction: row
+            figure
+                width: columns(2)
+                flex-shrink: 0
+                margin-right: var(--grid-gutter)
+                picture.is-png
+                    img
+                        margin: auto
+
+    @include in-page-without-sidebar
+        .top
+            width: columns(8)
+        ul
+            @include list-reset
+            @include grid(3, desktop)
+        li
+            display: flex
+            + li
+                margin-top: 0
+

@@ -1,0 +1,17 @@
+<nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc" }}">
+  <ol>
+    {{- if .context.Params.contents -}}
+      {{- partial "blocks/toc.html" .context.Params.contents -}}
+    {{- end -}}
+    <li>
+      <a href="#pages">{{ i18n "sitemap.pages" }}</a>
+    </li>
+    {{ range site.Sections }}
+      {{ if and (ne .Type "sitemap") (ne .Type "pages") }}
+        <li>
+          <a href="#{{ .Type }}">{{ safeHTML .Title }}</a>
+        </li>
+      {{ end }}
+    {{ end }}
+  </ol>
+</nav>

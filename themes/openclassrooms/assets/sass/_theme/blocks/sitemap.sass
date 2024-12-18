@@ -1,0 +1,20 @@
+.block-sitemap
+    h3 
+      a 
+        text-decoration: none
+    ul + h3
+      margin-top: $spacing-5
+    &:first-of-type
+      padding-top: 0
+
+    ul 
+        list-style-type: none
+        li
+            position: relative
+            ul
+                margin-left: $spacing-3
+                li
+                    a
+                        @include icon(corner-down-right-line)
+                          font-size: 0.75em
+                          margin-right: $spacing-1

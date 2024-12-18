@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rapportdemission.openclassrooms.com/sitemap.xml

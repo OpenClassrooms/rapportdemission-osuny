@@ -16,6 +16,7 @@ generate lang bucket="mr-staging.openclassrooms.tech":
     aws s3 cp s3://rapportdemission.openclassrooms.com/SignatureFR_MissionReport_V4.png ./static/SignatureFR_MissionReport_V4.png
     aws s3 cp s3://rapportdemission.openclassrooms.com/SignatureEN_MissionReport_V4.png ./static/SignatureEN_MissionReport_V4.png
     yarn osuny build
+    cp robots.txt public/robots.txt
 
 backup bucket="mr-staging.openclassrooms.tech" output="output":
     mkdir -p {{ output }}

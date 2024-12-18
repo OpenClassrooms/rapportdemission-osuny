@@ -1,0 +1,25 @@
+{
+  "name": "osuny-hugo-theme",
+  "version": "7.0.1",
+  "repository": "git@github.com:osunyorg/theme.git",
+  "author": "alexisben <alexis.benoit@noesya.coop>",
+  "contributors": [
+    "olivia206 <olivia.simonet@noesya.coop>",
+    "alexisben <alexis.benoit@noesya.coop>",
+    "arnaudlevy <arnaud.levy@noesya.coop>",
+    "clararigaud <clara.rigaud@noesya.coop>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "cssnano": "^5",
+    "cssnano-preset-advanced": "^6.0.1",
+    "intersection-observer": "^0",
+    "leaflet": "^1",
+    "pagefind": "^1",
+    "postcss": "^8",
+    "postcss-cli": "^9",
+    "postcss-sass": "^0",
+    "shelljs": "^0"
+  },
+  "bin": "./bin/osuny.js"
+}

@@ -1,0 +1,46 @@
+{{- $block := .block -}}
+{{- $template := .block.template -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+{{- $charLimit := 80 -}}
+{{- $isLarge := false -}}
+
+{{- with .block.data -}}
+  {{ $options := .options }}
+  {{ range .persons }}
+    {{- $person := site.GetPage (printf "/persons/%s" .slug) -}}
+    {{- $role := .role -}}
+    {{- $summary := $person.Params.summary -}}
+    {{- $content := $person.Content -}}
+    {{ with (or $role $summary $content)}}
+      {{- $contentLength := len . -}}
+      {{ if ge $contentLength $charLimit }}
+        {{- $isLarge = true -}}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  <div class="block block-persons{{ if $title }} block-with-title{{ end }}{{ if $isLarge }} block-with-long-text{{ end }} {{- if not $options.image }} without-photo {{- end }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+          "description" .description
+        )}}
+
+        <div class="persons">
+          {{- range .persons -}}
+            {{ $person := site.GetPage (printf "/persons/%s" .slug) }}
+            {{ partial "persons/person.html" (dict
+              "heading_level" $block.ranks.children
+              "options" $options
+              "person" $person
+              "role" .role
+            ) }}
+          {{- end -}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{- end -}}

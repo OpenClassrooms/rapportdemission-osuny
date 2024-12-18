@@ -1,0 +1,17 @@
+{{ $bodyclass := .Params.bodyclass | default "" }}
+
+{{ $bodyclass = printf "%s__%s %s" .Type .Kind $bodyclass }}
+
+{{ if .Params.design.full_width }}
+  {{ $bodyclass = printf "%s full-width" $bodyclass }}
+{{ end }}
+
+{{ if or .Params.design.toc.offcanvas site.Params.toc.force_offcanvas }}
+  {{ $bodyclass = printf "%s offcanvas-toc" $bodyclass }}
+{{ end }}
+
+{{ range .Params.posts_categories }}
+  {{ $bodyclass = printf "%s category--%s" $bodyclass . }}
+{{ end }}
+
+{{ return $bodyclass }}

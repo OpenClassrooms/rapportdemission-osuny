@@ -1,0 +1,31 @@
+{{- $block := .block -}}
+{{- $template := .block.template -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+{{ $heading_level := $block.ranks.children }}
+
+{{- with .block.data -}}
+
+  <div class="block block-publications {{- if $title }} block-with-title {{- end -}}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+          "description" .description
+        )}}
+
+        <div class="publications">
+          {{ range $publication := .publications -}}
+            {{ with site.GetPage (printf "/publications/%s" $publication) }}
+              {{ partial "publications/publication.html" (dict 
+                "publication" . 
+                "heading_level" $heading_level
+              )}}
+            {{ end}}
+          {{ end}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{- end -}}

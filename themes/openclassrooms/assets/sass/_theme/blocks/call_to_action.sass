@@ -1,0 +1,222 @@
+// BUTTONS STYLE
+$button-selector: "a:first-child"
+@if $block-call-to-action-all-actions-as-buttons
+    $button-selector: "a"
+
+.block-call_to_action
+    .top
+        margin-bottom: 0
+        .block-title
+            margin-bottom: $spacing-2
+            + .description
+                margin-top: 0
+        .description
+            * + ul, * + ol
+                margin-top: space(4)
+            ul:last-child, ol:last-child
+                margin-bottom: 0
+    .call_to_action
+        color: #{$block-call-to-action-color}
+        .description
+            a
+                color: inherit
+                text-decoration-color: #{$block-call-to-action-color}
+            p
+                @include h2
+        .actions
+            [role="group"]
+                @include media-breakpoint-down(desktop)
+                    display: flex
+                    flex-direction: column
+            a
+                @if not $block-call-to-action-all-actions-as-buttons
+                    @include meta
+                    @extend %underline-on-hover
+                    text-decoration-color: alphaColor(#{$block-call-to-action-color}, 0.3)
+                    color: #{$block-call-to-action-color}
+                margin-right: $spacing-3
+                margin-top: $spacing-3
+                display: inline-block
+                &:last-child
+                    margin-bottom: 0
+            #{$button-selector}
+                --btn-background: #{$block-call-to-action-button-background}
+                --btn-border: #{$block-call-to-action-button-border}
+                --btn-color: #{$block-call-to-action-button-color}
+                --btn-hover-background: #{$block-call-to-action-button-hover-background}
+                --btn-hover-border: #{$block-call-to-action-button-hover-border}
+                --btn-hover-color: #{$block-call-to-action-button-hover-color}
+                --btn-min-width: #{columns(2)}
+                @extend .button
+        figure
+            figcaption
+                @include meta
+                > p
+                    margin-left: auto
+                    width: fit-content
+        * + .actions
+            margin-top: $spacing-3
+        img
+            display: block
+    &--no_background
+        .actions
+            a:first-child
+                &:focus,
+                &:focus-visible
+                    outline-color: var(--color-text)
+        .call_to_action--with-image
+            figure
+                img
+                    width: 100%
+                figcaption
+                    margin-top: $spacing-2
+    &--accent_background
+        --cta-background-color: #{$block-call-to-action-accent-background}
+        margin-bottom: 0
+        .call_to_action
+            color: #{$block-call-to-action-accent-color}
+            .description
+                a
+                    text-decoration-color: #{$block-call-to-action-accent-color}
+            figure
+                a
+                    color: #{$block-call-to-action-accent-color}
+                    text-decoration-color: alphaColor(#{$block-call-to-action-accent-color}, 0.3)
+            .actions
+                #{$button-selector}
+                    --btn-background: #{$block-call-to-action-accent-button-background}
+                    --btn-border: #{$block-call-to-action-accent-button-border}
+                    --btn-color: #{$block-call-to-action-accent-button-color}
+                    --btn-hover-background: #{$block-call-to-action-accent-button-hover-background}
+                    --btn-hover-border: #{$block-call-to-action-accent-button-hover-border}
+                    --btn-hover-color: #{$block-call-to-action-accent-button-hover-color}
+                @if not $block-call-to-action-all-actions-as-buttons
+                    a
+                        color: #{$block-call-to-action-accent-color}
+                        text-decoration-color: alphaColor(#{$block-call-to-action-accent-color}, 0.3)
+    @include media-breakpoint-down(desktop)
+        &--accent_background
+            background-color: var(--cta-background-color)
+            .call_to_action
+                padding: var(--block-space-y) 0
+                figure
+                    figcaption
+                        margin-top: $spacing-2
+        .call_to_action
+            .actions
+                a
+                    &:last-child
+                        margin-bottom: 0
+        .call_to_action--with-image
+            padding-top: var(--grid-gutter)
+            display: flex
+            flex-direction: column
+            > *
+                order: 2
+            figure
+                margin-bottom: offset(1)
+                order: 1
+
+    @include in-page-with-sidebar
+        .call_to_action
+            display: flex
+            > *
+                order: 2
+        &--no_background
+            .call_to_action
+                &--with-image
+                    > div
+                        flex: 1
+                    figure
+                        margin-left: var(--grid-gutter)
+                        width: columns(3)
+        &--accent_background
+            .call_to_action
+                flex-direction: column
+                > div
+                    // TODO : simplifier l'application d'une couleur de fond sur le CTA avec sidebar et sans sidebar
+                    background-color: var(--cta-background-color)
+                    padding: columns(1)
+                    width: 100%
+                    position: relative
+                    &::after
+                        background-color: var(--cta-background-color)
+                        content: ''
+                        display: block
+                        position: absolute
+                        top: 0
+                        bottom: 0
+                        left: 100%
+                        // Calcul de la largeur nécessaire pour remplir l'espace droit entre le container et le bord droit de la fenêtre
+                        width: grid-external-space()
+                &--with-image
+                    figure
+                        align-items: flex-end
+                        display: flex
+                        justify-content: space-between
+                        margin-bottom: calc(var(--grid-gutter-negative) + -#{$spacing-3})
+                        order: 1
+                        padding-left: columns(1)
+                        position: relative
+                        z-index: 2
+                        picture
+                            width: columns(3)
+                        figcaption
+                            flex: 1
+                            margin-left: $spacing-3
+                            > p
+                                margin-left: unset
+                    > div
+                        padding-top: calc(var(--grid-gutter) * 2 + #{$spacing-3})
+
+    @include in-page-without-sidebar
+        background-color: var(--cta-background-color)
+        padding-top: 0
+        padding-bottom: 0
+        .block-content
+            padding: $spacing-6 var(--grid-gutter)
+            margin-left: var(--grid-gutter-negative)
+            margin-right: var(--grid-gutter-negative)
+        .call_to_action--with-image
+            @include grid
+            > div
+                grid-column: 1/7
+            > figure
+                grid-column: 8/13
+                figcaption
+                    margin-top: $spacing-2
+        .call_to_action--without-image
+            display: block
+            > div
+                @include grid
+                row-gap: 0px
+                .top
+                    grid-column: 1/9
+                    display: grid
+                    grid-template-rows: subgrid
+                    grid-row: span 2
+                .actions
+                    align-items: flex-start
+                    display: flex
+                    flex-direction: column
+                    grid-column: 10/13
+                    margin-top: 0
+                    a
+                        margin-right: 0
+                        &:first-child
+                            margin-top: 0
+                    a + a
+                        margin-top: $spacing-3
+            &.call_to_action--with-title
+                .actions
+                    grid-row: 2
+
+            @include media-breakpoint-down(lg)
+                > div
+                    .top
+                        grid-column: 1/8
+                    .actions
+                        grid-column: 9/13
+    @include in-page-with-or-without-sidebar
+        .block-title
+            @include h5

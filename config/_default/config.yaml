@@ -1,4 +1,4 @@
-theme: osuny
+theme: openclassrooms
 paginate: 18
 enableRobotsTXT: true
 removePathAccents: true
@@ -16,3 +16,5 @@ params:
     design_system:
       lightbox:
         disabled: true
+params:
+  keycdn: ""

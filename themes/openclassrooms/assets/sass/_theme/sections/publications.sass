@@ -1,0 +1,138 @@
+.publications-statistics
+    ol
+        @include list-reset
+        @include grid(2)
+        @include grid(3, md)
+        @include grid(4, desktop)
+        @include grid(6, xxl)
+        b
+            @include lead
+        span
+            @include meta
+        b, span
+            display: block
+
+.publication
+    border-bottom: 1px solid var(--color-border)
+    padding-bottom: $spacing-2
+    padding-top: $spacing-2
+    position: relative
+    @include media-breakpoint-up(desktop)
+        align-items: center
+        display: flex
+        gap: $spacing-3
+        justify-content: space-between
+        @include icon(arrow-right-line, after)
+            font-size: pxToRem(40)
+    a
+        text-decoration: none
+    .publication-content
+        display: flex
+        flex-direction: column
+        .publication-title
+            a
+                @include stretched-link(after)
+        .publication-meta
+            margin-bottom: space()
+            order: -1
+            * + *
+                &::before
+                    content: ', '
+        .publication-ref
+            @include meta
+            color: var(--color-text-alt)
+            margin-top: $spacing-1
+            a
+                color: var(--color-text-alt)
+    &:hover
+        a, &::before
+            color: var(--color-accent)
+    @include media-breakpoint-down(desktop)
+        .publication-meta
+            padding-right: $spacing-4
+
+.publications
+    margin-top: $spacing-5
+
+.publications-list
+    @include list-reset
+
+.publications__section
+    .publication
+        @include media-breakpoint-up(desktop)
+            align-items: baseline
+            &::after
+                font-size: inherit
+            .publication-content
+                align-items: baseline
+                column-gap: var(--grid-gutter)
+                flex-direction: row
+                flex-wrap: wrap
+                .publication-title
+                    order: -1
+                .publication-title,
+                .publication-ref
+                    width: columns(8)
+                .publication-meta
+                    @include meta
+                    margin-bottom: 0
+                    flex: 1
+
+.publications__page
+    .hero
+        h1, hgroup
+            width: 100%
+            span + span
+                &::before
+                    content: ', '
+    .document-content > .container
+        @include media-breakpoint-up(desktop)
+            @include grid
+        .content
+            @include media-breakpoint-up(desktop)
+            grid-column: 1 / 9
+        .document-sidebar
+            margin-bottom: $spacing-5
+            .paper-ref p
+                word-break: break-all
+            @include media-breakpoint-up(desktop)
+                grid-column: 9 / 13
+                order: 2
+            [itemprop="author"] 
+                + *
+                    margin-top: $spacing-3
+                .person
+                    flex-direction: row
+                    align-items: center
+                    display: flex
+                    gap: $spacing-3
+                    .name
+                        @include signature
+                    .avatar
+                        margin-bottom: 0
+                        width: columns(1)
+            > * + *
+                margin-top: $spacing-5
+    .downloads
+        &:not(:first-child)
+            margin-top: $spacing-5
+        nav
+            margin-top: $spacing-3
+            @include grid(2, desktop)
+            @include grid(4, xxl)
+            @include media-breakpoint-up(xxl)
+                grid-gap: $spacing-2 var(--grid-gutter)
+            @include media-breakpoint-down(xxl)
+                grid-gap: $spacing-2
+            > a
+                width: 100%
+                display: block
+                @include media-breakpoint-down(desktop)
+                    margin-bottom: $spacing-3
+
+    .block-siblings-navigation
+        .block-content
+            padding-left: 0 !important
+        .container
+            padding-left: 0
+            padding-right: 0

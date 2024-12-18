@@ -1,0 +1,186 @@
+.paper
+    display: flex
+    gap: var(--grid-gutter)
+    a
+        transition: color 0.3s ease
+        @extend %underline-on-hover
+    .paper-title
+        margin-bottom: $spacing-2
+        a:hover
+            color: var(--color-accent)
+    > div:first-child
+        flex: 1
+    .paper-meta
+        @include meta
+        color: var(--color-text-alt)
+        @include media-breakpoint-up(desktop)
+            width: columns(5)
+        p
+            display: block
+        .paper-volume
+            @include meta
+            a
+                @include link(var(--color-text-alt))
+                text-transform: none
+        .paper-kind + a
+            font-style: italic
+            &::before
+                content: '— '
+                display: inline-block
+
+.top + .papers
+    margin-top: $spacing-3
+
+.papers
+    @include list-reset
+    margin-top: $spacing-5
+    li
+        + li
+            margin-top: $spacing-4
+            @include media-breakpoint-up(desktop)
+                margin-top: $spacing-5
+        article
+            + article
+                margin-top: $spacing-4
+                @include media-breakpoint-up(desktop)
+                    margin-top: $spacing-5
+
+.papers__section
+    .paper-actions
+        @include media-breakpoint-up(lg)
+            flex-direction: row
+            width: columns(5)
+            button[data-open-modal]
+                width: columns(2)
+            figure
+                width: columns(3)
+.papers__page
+    @include media-breakpoint-down(desktop)
+        .document-content
+            aside
+                order: 2
+                margin-bottom: $spacing-5
+    @include media-breakpoint-up(desktop)
+        .hero
+            .content
+                .hero-text
+                    width: auto
+        .paper-sidebar
+            > div
+                height: 100%
+                position: relative
+            aside
+                padding-bottom: $spacing-3
+            .toc-container
+                height: unset
+                @include sticky(-1px)
+            .media
+                width: columns(2)
+    .document-content
+        min-height: 100vh
+        .content
+            margin-bottom: $spacing-6
+            section + section
+                margin-top: $spacing-4
+                @include media-breakpoint-up(desktop)
+                    margin-top: $spacing-6
+            h2
+                margin-bottom: $spacing-2
+            .paper-essentials
+                h2
+                    @include meta
+                    margin-top: $spacing-4
+                    &:first-of-type
+                        margin-top: 0
+            .paper-body
+                h2
+                    margin-bottom: $spacing-4
+            .paper-authors
+                h2
+                    @include meta
+                .authors
+                    @include grid(2, desktop)
+                    article
+                        margin-top: $spacing-3
+                        .name
+                            a
+                                @include h4
+                                @include stretched-link(before)
+                                text-decoration: none
+        .document-nav
+            dl
+                margin: 0
+                dt
+                    @include meta
+                    margin-bottom: $spacing-2
+                    &:not(:first-of-type)
+                        margin-top: $spacing-4
+                dd:first-of-type
+                    a
+                        display: flex
+                        flex-direction: column
+                        span
+                            order: 3
+    &:not(.full-width)
+        .document-content
+            &.sidebar-on-start
+                .section-sidebar
+                    @include sidebar(start)
+                @include media-breakpoint-up(desktop)
+                    .container
+                        .content
+                            padding-left: offset(4)
+            &.sidebar-on-end
+                .section-sidebar
+                    @include sidebar(end)
+                @include media-breakpoint-up(desktop)
+                    .container
+                        .content
+                            padding-right: offset(4)
+                    .blocks
+                        .block
+                            .block-content
+                                padding-left: 0
+                                padding-right: offset(4)
+                    .heading
+                        h2
+                            padding-left: 0
+                            padding-right: offset(4)
+
+// Actions
+.paper-actions
+    display: flex
+    align-items: start
+    gap: var(--grid-gutter)
+    @include media-breakpoint-down(desktop)
+        flex-wrap: wrap
+        gap: $spacing-3
+    button, a
+        @include meta
+        @include button-reset
+        align-items: center
+        color: var(--color-text)
+        cursor: pointer
+        display: flex
+        padding: 0
+        text-decoration: none
+    button
+        @include icon-frame(eye-line, $hoverable: true)
+    a
+        @include icon-frame(download-2-line, $hoverable: true)
+
+.citations
+    &:not(:first-child)
+        margin-top: $spacing-5
+    > div
+        margin-top: $spacing-3
+        @include grid(1)
+        @include grid(2, md, $spacing-3)
+        @include media-breakpoint-down(md)
+            row-gap: $spacing-3
+    .citation
+        a
+            display: block
+        p
+            @include meta
+            margin-top: $spacing-2
